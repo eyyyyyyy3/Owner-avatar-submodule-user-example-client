@@ -1,75 +1,61 @@
-Submodule User Example Server
+# Submodule User Example Client
 
-This project is a Rust-based gRPC server that uses Tokio, Tonic, and Prost to handle gRPC requests. It is designed to work with the submodule-user-example-client, which requires the server to be running to function properly. The project utilizes Git submodules to manage its dependencies.
-Features
+This repository provides a **gRPC client** written in **Rust** using the **Tokio**, **Tonic**, and **Prost** libraries for asynchronous operations and communication with gRPC servers. It handles requests via gRPC and interacts with a server through the provided protocol files.
 
-    Async support via Tokio.
-    gRPC server implementation using Tonic.
-    Protocol buffer serialization with Prost.
-    Git submodule integration for managing dependent repositories.
+### Submodules
+This repository employs a submodule, `submodule-provider-example`, which contains the necessary **gRPC** definition files. These files are essential for the server to interact with other services using gRPC.
 
-Getting Started
-Clone the Repository
+- **Submodule:** [submodule-provider-example](https://github.com/eyyyyyyy3/submodule-provider-example)
 
-When cloning this repository, ensure you initialize and update its submodules:
+The submodule is already added in this repository, and all you need to do is **initialize** it locally.
 
-git clone --recurse-submodules <repository-url>
+### How to Work with Git Submodules
 
-If you've already cloned the repository without initializing submodules, you can do it manually:
+To work with Git submodules, follow these steps:
 
-git submodule update --init --recursive
+1. **Cloning the Repository with Submodules:**
 
-Running the Server
+   If you clone the repository and want to include the submodule, use:
 
-To start the submodule-user-example-server, navigate to the server's directory and run:
+   ```bash
+   git clone --recurse-submodules https://github.com/eyyyyyyy3/submodule-user-example-client.git
+   ```
 
-cd submodule-user-example-server
-cargo run
+   If you have already cloned the repository without the `--recurse-submodules` flag, you can initialize the submodule with the following commands:
 
-The server will start listening for gRPC requests.
-Git Submodule Management
+   ```bash
+   git submodule init
+   git submodule update
+   ```
 
-This project uses Git submodules to include dependencies like submodule-user-example-client.
-Adding a Submodule
+2. **Updating Submodules:**
 
-To add a submodule to the repository:
+   To update the submodule to the latest commit from the upstream repository, use:
 
-    Navigate to the root of the repository.
+   ```bash
+   git submodule update --remote
+   ```
 
-    Use the following command to add the submodule:
+   This will fetch the latest changes from the submodule's repository.
 
-git submodule add <submodule-repository-url> <submodule-directory>
+### How to Start the Client
 
-For example:
+To run the gRPC client, follow these simple steps:
 
-git submodule add https://github.com/eyyyyyyy3/submodule-user-example-client submodule-user-example-client
+1. **Navigate to the project directory:**
+   ```bash
+   cd submodule-user-example-client
+   ```
 
-Commit the changes to include the submodule:
+2. **Build and run the client using Cargo:**
+   ```bash
+   cargo run
+   ```
 
-    git commit -m "Add submodule-user-example-client as a submodule"
+### Running the Server
 
-Updating Submodules
+To interact with the client, you also need to run the server locally. The server can be found in the **submodule-user-example-server** repository, which is hosted at the following link:
 
-If the submodule repository has updates, pull them into your local repository with the following commands:
+- [submodule-user-example-server GitHub Repository](https://github.com/eyyyyyyy3/submodule-user-example-server)
 
-# Navigate to the root of the repository
-git submodule update --remote
-
-To fetch updates for a specific submodule:
-
-git submodule update --remote submodule-user-example-client
-
-After updating, commit the changes to the superproject:
-
-git commit -m "Update submodule-user-example-client"
-
-# Client Dependency
-
-The submodule-user-example-client depends on the server being up and running. Start the server first before using the client:
-
-    Start the server:
-
-cd submodule-user-example-server
-cargo run
-
-Then, run the client in its directory.
+Make sure the server is running before executing the client. The client will communicate with the server using gRPC, so both must be operational for the interaction to work.
